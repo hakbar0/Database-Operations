@@ -17,7 +17,7 @@ export async function seed(app: INestApplication) {
     const userRepository = app.get(getRepositoryToken(User));
 
     // Create up to 50 users
-    for (let i = 1; i <= 50; i++) {
+    for (let i = 1; i <= 70; i++) {
       const user = new User();
       user.username = faker.internet.userName();
       user.email = faker.internet.email();

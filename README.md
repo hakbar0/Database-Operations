@@ -1,10 +1,9 @@
-# Auth Database Operations
+# Database Operations
 
-This repository contains code for a basic authentication system built using NestJS and PostgreSQL. It provides the following three endpoints:
+This repository contains two endpoints:
 
-- `/register` - Registers a new user with the provided username, email, and password.
-- `/login` - Logs in a user with the provided email and password.
-- `/profile` - A protected route that requires a JWT token to access and returns the user profile information, excluding the password and id.
+- `/users` - Retrieves a list of users
+- `/posts/:username` - Retrieves a list of posts by username
 
 ## Requirements
 
@@ -19,7 +18,9 @@ To run this application, you must have the following installed:
 
 1. Clone the repository to your local machine.
 2. Run the build-and-run script by executing the `build-and-run.sh` file located in the root directory of the repository. On Windows, you can do this by installing Git Bash, opening the repository in Git Bash, and running `./build-and-run.sh`. On macOS, you can run `sh build-and-run.sh` from the Terminal.
-3. Once the script has finished running, navigate to `http://localhost:3000` to access the application.
+3. Next, run `npm i` to install the necessary dependencies.
+4. Next, run `npm run start:dev` to start the server.
+5. Once the script has finished running, navigate to `http://localhost:3000` to access the application.
 
 ### Running `.sh` files on Windows
 
@@ -33,31 +34,45 @@ To run `.sh` files on macOS, you can use the Terminal app. Navigate to the repos
 
 To use the application, you can use any HTTP client such as Postman or cURL. Below are examples of how to use each of the endpoints.
 
-### `/register`
+### `/users`
 
-To register a new user, send a POST request to `http://localhost:3000/auth/register` with the following JSON body:
+To retrieve a list of users, send a GET request to `http://localhost:3000/users` with the following optional query parameters:
 
-{
-"username": "your-username",
-"email": "your-email@example.com",
-"password": "your-password"
-}
+- `offset` - The number of users to skip before starting to return results (default: 0).
+- `limit` - The maximum number of users to return (default: 50).
 
-
-If successful, the API will respond with the newly created user object.
-
-### `/login`
-
-To log in a user, send a POST request to `http://localhost:3000/auth/login` with the following JSON body:
+If successful, the API will respond with a JSON object containing an array of users and metadata about the results:
 
 {
-"email": "your-email@example.com",
-"password": "your-password"
+"offset": number,
+"limit": number,
+"totalPages": number,
+"users": [
+{
+"id": number,
+"username": string,
+"email": string
+},
+...
+],
+"totalCount": number
 }
 
+### `/posts/:username`
 
-If successful, the API will respond with an access token that can be used to access protected routes.
+To retrieve a list of posts by username, send a GET request to `http://localhost:3000/posts/:username`, where `:username` is the username of the user whose posts you want to retrieve.
 
-### `/profile`
+If successful, the API will respond with a JSON array containing the user's posts:
 
-To access a user's profile information, send a GET request to `http://localhost:3000/auth/profile` with an `Authorization` header containing the access token obtained from logging in.
+[
+{
+"id": number,
+"title": string,
+"body": string,
+"user": {
+"id": number,
+"username": string,
+"email": string
+}
+},
+]
