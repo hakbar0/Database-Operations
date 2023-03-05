@@ -1,0 +1,43 @@
+{
+  "info": {
+    "_postman_id": "71effc11-f61a-4ad7-8d3b-02d26e758618",
+    "name": "Database Operations",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:3000/users?offset=50",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["users"],
+              "query": [
+                {
+                  "key": "offset",
+                  "value": "50"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Posts By Username",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "localhost:3000/posts/Sonya.Heaney"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

@@ -76,3 +76,7 @@ If successful, the API will respond with a JSON array containing the user's post
 }
 },
 ]
+
+## Postman collection
+
+Note: a postman collection has been provided which can be imported. Called Database Operations.postman_collection.json
