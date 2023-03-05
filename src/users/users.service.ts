@@ -13,7 +13,7 @@ export class UsersService {
   async findAll(options?: {
     skip?: number;
     take?: number;
-  }): Promise<[User[], number]> {
+  }): Promise<[Partial<User[]>, number]> {
     const [users, count] = await this.userRepository.findAndCount({
       ...options,
       select: ['username', 'email', 'createdAt'],
