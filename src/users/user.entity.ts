@@ -11,7 +11,7 @@ import { Post } from '../posts/post.entity';
 export class User {
   @PrimaryGeneratedColumn()
   @Index()
-  id: string;
+  id: number;
 
   @Column()
   @Index()
